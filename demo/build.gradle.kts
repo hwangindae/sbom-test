@@ -2,6 +2,7 @@ plugins {
 	java
 	id("org.springframework.boot") version "4.1.1"
 	id("io.spring.dependency-management") version "1.1.7"
+	id("com.google.cloud.tools.jib") version "3.5.4"
 }
 
 group = "com.example"
@@ -25,4 +26,14 @@ dependencies {
 
 tasks.withType<Test> {
 	useJUnitPlatform()
+}
+
+jib {
+    from {
+        image = "eclipse-temurin:25-jre"
+    }
+
+    container {
+        ports = listOf("8080")
+    }
 }
